@@ -94,6 +94,12 @@ public class NewAlarmFormActivity extends AppCompatActivity implements VerticalS
                 .primaryColor(colorPrimary)
                 .primaryDarkColor(colorPrimaryDark)
                 .displayBottomNavigation(true)
+                .useTextViewButton(true)
+                .buttonTextColor(Color.parseColor("#000000"))
+                .buttonText("Continue")
+                .hideFinalVerticalLine(true)
+                .showConfirmationAtTheEnd(false)
+                .materialDesignInDisabledSteps(true)
                 .init();
 
     }
@@ -113,10 +119,10 @@ public class NewAlarmFormActivity extends AppCompatActivity implements VerticalS
             case DESCRIPTION_STEP_NUM:
                 view = createAlarmDescriptionStep();
                 break;
-            case TIME_STEP_NUM:
+            case DAYS_STEP_NUM:
                 view = createAlarmTimeStep();
                 break;
-            case DAYS_STEP_NUM:
+            case TIME_STEP_NUM:
                 view = createAlarmDaysStep();
                 break;
         }
