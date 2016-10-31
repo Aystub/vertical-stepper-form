@@ -65,6 +65,7 @@ public class VerticalStepperFormLayout extends RelativeLayout implements View.On
     protected boolean useTextViewButton;
     protected boolean hideFinalNextStepButton;
     protected boolean hideFinalVerticalLine;
+    protected int nextButtonBottomMargin = 0;
 
     // Views
     protected LayoutInflater mInflater;
@@ -569,6 +570,7 @@ public class VerticalStepperFormLayout extends RelativeLayout implements View.On
         this.hideFinalNextStepButton = builder.hideFinalNextStepButton;
         this.hideFinalVerticalLine = builder.hideFinalVerticalLine;
         this.paddingLeft = builder.paddingLeft;
+        this.nextButtonBottomMargin = builder.nextButtonBottomMargin;
 
         initStepperForm(builder.steps, builder.stepsSubtitles);
     }
@@ -760,8 +762,15 @@ public class VerticalStepperFormLayout extends RelativeLayout implements View.On
 
         TextView nextButtonTV = (TextView) stepLayout.findViewById(R.id.next_step_text_view);
         nextButtonTV.setPadding(paddingLeft,0,0,0);
+        LinearLayout.LayoutParams nextButtonTVParams = (LinearLayout.LayoutParams) nextButtonTV.getLayoutParams();
+        nextButtonTVParams.bottomMargin = nextButtonBottomMargin;
+        nextButtonTV.setLayoutParams(nextButtonTVParams);
+
         AppCompatButton nextButton = (AppCompatButton) stepLayout.findViewById(R.id.next_step);
         nextButton.setPadding(paddingLeft,0,0,0);
+        LinearLayout.LayoutParams nextButtonParams = (LinearLayout.LayoutParams) nextButton.getLayoutParams();
+        nextButtonParams.bottomMargin = nextButtonBottomMargin;
+        nextButton.setLayoutParams(nextButtonParams);
 
         if(useTextViewButton){
             nextButtonTV = (TextView) stepLayout.findViewById(R.id.next_step_text_view);
@@ -1348,6 +1357,7 @@ public class VerticalStepperFormLayout extends RelativeLayout implements View.On
         protected boolean hideFinalVerticalLine = false;
         protected String buttonText = null;
         protected int paddingLeft = 0;
+        protected int nextButtonBottomMargin = 0;
 
         protected Builder(VerticalStepperFormLayout stepperLayout,
                           String[] steps,
@@ -1574,6 +1584,17 @@ public class VerticalStepperFormLayout extends RelativeLayout implements View.On
          */
         public Builder useTextViewButton(boolean useTextViewButton){
             this.useTextViewButton = useTextViewButton;
+            return this;
+        }
+
+        /**
+         * Set bottom margin of next/continue button
+         *
+         * @param bottomMargin  bottom margin for button in pixels
+         * @return  the builder instance
+         */
+        public Builder nextButtonBottomMargin(int bottomMargin){
+            this.nextButtonBottomMargin = bottomMargin;
             return this;
         }
 
